@@ -12,7 +12,7 @@ import com.epam.jmp.cl.loader.PluginLoader;
 public class ApplicationRunner {
 	
 	private static Logger theLogger = Logger.getLogger(ApplicationRunner.class);
-	private static final String WORSPACE_PATH = "D:\\eclipseLUNA\\workspace";
+	private static final String WORSPACE_PATH = "D:\\git\\tanya";
     //private Pattern pattern = Pattern.compile("[0-9]+");
 
 	public static void main(String[] args) throws Exception {
