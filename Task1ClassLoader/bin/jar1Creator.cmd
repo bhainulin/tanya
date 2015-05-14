@@ -1,0 +1,2 @@
+@rem it will be ClassCastException: jar cvf jar1.jar com/epam/jmp/cl/api/ICalculatorPlugin.class com/epam/jmp/cl/api/AdditionNumbersPlugin.class
+jar cvf ../plugins/jar1.jar com/epam/jmp/cl/api/AdditionNumbersPlugin.class
