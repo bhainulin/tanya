@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p">
+
+	<!-- new  new new new Реализовать bean definitions для service классов: -->
+	
+	<!-- see ref beans in repository-config.xml -->
+	
+	<bean id="itemService" class="org.shop.api.impl.ItemServiceImpl">
+		<constructor-arg index="0" ref="itemRepository"/>
+	</bean>
+	
+	 <!-- ItemService: передать необходимые параметры через конструктор -->
+	<bean id="orderService" class="org.shop.api.impl.OrderServiceImpl">
+		<property name="orderRepository" ref="orderRepository"/>
+		<property name="itemService" ref="itemService"/>
+	</bean>
+	
+	<!-- ProductService: использовать autowiring by constructor -->
+	<bean id="productService" class="org.shop.api.impl.ProductServiceImpl" autowire="constructor"/>
+	
+	<!-- SellerService: использовать autowiring by type -->
+	<bean id="sellerService" class="org.shop.api.impl.SellerServiceImpl" autowire="byType"/>
+	
+	<!-- UserService: использовать метод populate -->
+	<bean id="userService" class="org.shop.api.impl.UserServiceImpl" p:userRepository-ref="userRepository"/>	
+	
+	 <!-- ProposalService: передать repository через конструктор, а остальные остальные параметры передать через соответствующий setter-мето -->
+	<bean id="proposalService" class="org.shop.api.impl.ProposalServiceImpl">
+		<constructor-arg ref="proposalRepository"/>
+		<property name="productService" ref="productService"/>
+		<property name="sellerService" ref="sellerService"/>
+	</bean>
+		
+	
+</beans>
