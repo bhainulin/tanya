@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	                    http://www.springframework.org/schema/beans/spring-beans.xsd
+		                http://www.springframework.org/schema/context
+		                http://www.springframework.org/schema/context/spring-context.xsd
+		                http://www.springframework.org/schema/util
+ 		                http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+	>
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.epam.sc.repository"/>
+	
+	<util:properties id="props" location="/auditorium.properties" />
+	
+	<!-- used @Repository 
+	<bean id="userMapRepository" class="com.epam.sc.repository.map.UserMapRepository"/>
+	<bean id="userTicketMapRepository" class="com.epam.sc.repository.map.UserTicketMapRepository"/>
+	<bean id="eventMapRepository" class="com.epam.sc.repository.map.EventMapRepository"/>
+	<bean id="eventAuditoriumMapRepository" class="com.epam.sc.repository.map.EventAuditoriumMapRepository"/>
+	<bean id="ticketMapRepository" class="com.epam.sc.repository.map.TicketMapRepository"/>
+	<bean id="counterMapRepository" class="com.epam.sc.repository.map.CounterMapRepository"/> -->
+	
+	<bean id="auditoriumPropertyRepository" class="com.epam.sc.repository.property.AuditoriumPropertyRepository">
+	     <constructor-arg>
+			<list>
+			    <bean class="com.epam.sc.beans.Auditorium" p:id="${a1.id}" p:name="${a1.name}" p:countOfSeats="${a1.count}">
+				    <property name="vipSeats" value="#{'${a1.vip}'.split(',')}"/>
+				</bean>
+				<bean class="com.epam.sc.beans.Auditorium" p:id="${a2.id}" p:name="${a2.name}" p:countOfSeats="${a2.count}">
+				    <property name="vipSeats" value="#{'${a2.vip}'.split(',')}"/>
+				</bean>
+				<bean class="com.epam.sc.beans.Auditorium" p:id="${a3.id}" p:name="${a3.name}" p:countOfSeats="${a3.count}">
+				    <property name="vipSeats" value="#{'${a3.vip}'.split(',')}"/>
+				</bean>
+			</list>
+		 </constructor-arg>	
+	</bean>
+		
+</beans>

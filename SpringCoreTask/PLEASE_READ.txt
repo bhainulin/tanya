@@ -1,0 +1,26 @@
+Hi, thanks for your feedback.
+Please find few my comments below.
+
+ A few point which will be good to fix (spring related): 
+ - Spring supports nice role separation: Services and Repositories. So don't keep data in services like AuditoriumService 
+ >>[TY] Auditorium data is moved to AuditoriumRepository
+ - Interfaces help you to implement IoC (inversion of control). Which give you change to modify app without redesign and Spring provides this for you. Try to use it. 
+ >>[TY] Added interfaces for all Services and Repositories. 
+ - Even Spring apps need to be tested so where is xUnit tests? 
+ >>[TY] Added tests only for UserService as example. Unfortunately don't have enough time to cover all services. I'll try to add them later.
+ - Single code responsibility is great practice which help you to keep code complexity always low. Your DiscountService has two responsibility (keeping strategies and calculating discount) as result I can't add new strategy and plug it without code modification 
+ >>[TY] I've tried to separate logic. Now DiscountService returns final price. To add new Strategy: 1. Create new class and extend it from abstract DiscountStrategy. 2. Override calculateDiscount method. 3. Add new bean to discount-service-config.xml
+ - Don't mix types of injection in same place that's not readable. 
+ >>[TY] Fixed this in UserService.
+ 
+ Non Spring: 
+ - Always keep code clean so no commented code 
+ - EventService.create doesn't support date/time and where is etForDateRange? 
+  >>[TY]1. Event is just a film. Date is contained in EventAuditorium entity. So I use another api: com.epam.sc.services.EventServiceImpl.assignAuditorium(Event, Auditorium, LocalDateTime)
+        2. getForDateRange - it is an optional task. I skipped it.
+ - Why I need to modify code if I added new auditorium to property file. That's not configuration approach. 
+  >>[TY] We discussed that building new auditorium in cinema is a very rare case. Hence I decide inject all autitoriums in list in config file.
+  But If it's necessary to add(create) new beans from property file very often We may use java.util.Properties and parse them in "init" method (For now I didn't do this)
+ - BookingService.bookTicket doesn't support case without user
+  >>[TY] Added
+
